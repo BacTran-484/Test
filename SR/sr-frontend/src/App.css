@@ -1,0 +1,180 @@
+#app {
+  color: #2c3e50;
+  font-family: RegularRoboto;
+  text-align: center;
+ 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  font-size: 10px !important;
+  font-family: RegularRoboto !important;
+}
+.top-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1071;
+}
+h3 {
+  margin: 40px 0 0;
+} 
+a:hover {
+  text-decoration: none !important;
+}
+.vs__search, .vs__search:focus{
+  min-width: 120px;;
+}
+.container.content {
+  margin-top: 16.8em;
+  margin-bottom: 7.6em;
+}
+.d-inline-block {
+  padding: 0px;
+}
+.align-left {
+  text-align: left;
+  align-items: baseline;
+}
+.align-right {
+  text-align: right;
+  align-items: baseline;
+}
+label{
+  white-space: nowrap;
+}
+.my-common-code-table {
+  position: relative;
+}
+.my-common-code-table th {
+  background: #034ea2;
+  color: #fff;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff !important;
+  position: sticky;
+  top: -1px;
+}
+span.vue-ads-flex-grow {
+  text-align: center;
+  margin-right: -20px;
+}
+table tr.vue-ads-bg-gray-100 {
+  background-color: #f2faff;
+}
+table tr.vue-ads-bg-teal-100 {
+  background-color: #6597d0;
+  color: #fff;
+}
+#table-scroll {
+  overflow-y: scroll;
+  height: 450px;
+}
+thead tr {
+  border-color: #034ea2;
+}
+@media (min-width: 1200px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl {
+    width: auto !important;
+    max-width: 100% !important;
+  }
+  .content {
+    padding: 0 !important;
+    margin-right: 278px !important;
+    margin-left: 278px !important;
+  }
+}
+.home-content{
+  justify-content: space-between;
+  position: relative;
+  display: flex;
+  flex-flow: wrap;
+  min-height: 650px;
+}
+ 
+/* Create three equal columns that floats next to each other */
+.column {
+  width: 398px;
+  margin-bottom: 5%;
+}
+ 
+.home-content .row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ 
+/* Clear floats after the columns */
+.home-content .row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.vs__selected{
+  width: 100%;    
+  overflow: hidden;
+  white-space: nowrap;
+}
+.vs__selected + .vs__search{
+  position: absolute;
+}
+.vs__dropdown-toggle{
+  min-height: 34px;
+}
+.vs__selected-options{
+  max-width: calc(100% - 41px);
+}
+.parent-code {
+  display: flex;
+  margin-bottom: 59px;
+  align-items: baseline;
+  font-size: 2.2em;
+}
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 398px) {
+  .column {
+      width: 100%;
+  }
+}
+@media screen and (min-width: 1921px) {
+  .home-content{
+      justify-content: center;
+  }
+  .column{
+      margin: 0px 42px 84px;
+  }
+}
+ 
+@media only screen and (max-width : 1800px){
+  .container.content { 
+  margin-left: 100px !important;
+  margin-right: 100px !important;
+}
+.home-content{
+      justify-content: space-evenly;
+  }
+}
+@media (max-width : 1366px){
+.home-content{
+      justify-content: space-evenly;
+  }
+  .container.content {
+  margin: auto !important;
+  margin-top: 96px !important;
+}
+ 
+}
+@media (max-width : 1366px){
+  .parent-code{
+    flex-wrap: wrap;
+    text-align: left;
+    align-items: baseline;
+  }
+  .selectbox{
+    width: 100%;
+    margin-bottom: 14px;
+  }
+  
+  }
