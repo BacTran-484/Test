@@ -3,7 +3,7 @@ server:
 datasource:
   url: jdbc:mysql://localhost:3306/sr
   username: root
-  password: Xoaiaholic1@
+  password: Tab27481997
   driver-class-name: com.mysql.cj.jdbc.Driver
 spring:
   jpa:
