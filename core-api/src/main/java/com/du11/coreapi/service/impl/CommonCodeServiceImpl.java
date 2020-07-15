@@ -1,6 +1,6 @@
 package com.du11.coreapi.service.impl;
 
-import com.du11.coreapi.dto.response.SelectBoxResponse;
+import com.du11.coreapi.dto.response.SelectBoxResponseDTO;
 import com.du11.coreapi.repository.CommonCodeRepository;
 import com.du11.coreapi.service.CommonCodeService;
 import lombok.AllArgsConstructor;
@@ -18,9 +18,9 @@ public class CommonCodeServiceImpl implements CommonCodeService {
     private final CommonCodeRepository commonCodeRepository;
 
     @Override
-    public List<SelectBoxResponse> getMainCodeForSelectbox() {
+    public List<SelectBoxResponseDTO> getMainCodeForSelectbox() {
         return commonCodeRepository.findMainCode().stream().map(
-                code -> new SelectBoxResponse(code.getKey().getCdId(), code.getDtlCdNm())
+                code -> new SelectBoxResponseDTO(code.getKey().getCdId(), code.getDtlCdNm())
         ).collect(Collectors.toList());
     }
 }

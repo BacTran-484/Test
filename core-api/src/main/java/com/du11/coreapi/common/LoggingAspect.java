@@ -5,21 +5,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.repository.Repository;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
 @Slf4j
+@Aspect
 @Component
 public class LoggingAspect {
 
     @Autowired
     ObjectMapper mapper;
 
-    @Around(LoggingAspectConfig.POINTCUT_CONTROLLER +" || "+LoggingAspectConfig.POINTCUT_SERVICE
-            + " || "+LoggingAspectConfig.POINTCUT_REPOSITORY)
+    @Pointcut("within(@org.springframework.stereotype.Repository *)")
+    public void repositoryClassMethods() {};
+
+    @Around("repositoryClassMethods()")
     public Object logHeadAndTail(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
 

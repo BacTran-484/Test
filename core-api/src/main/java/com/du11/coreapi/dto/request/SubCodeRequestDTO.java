@@ -9,8 +9,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MainCodeRequest implements Serializable {
-    private String code;
-    private String name;
-    private String expDate;
+
+public class SubCodeRequestDTO implements Serializable {
+    private String cdId;
+    private String dtlCdId;
+    private String rgrEno;
 }

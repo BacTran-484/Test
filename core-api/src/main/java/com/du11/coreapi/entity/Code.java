@@ -33,4 +33,7 @@ public class Code implements Serializable {
 
     @Column(name = "DL_DT")
     private String dlDt;
+
+    @Column(name = "DLR_ENO")
+    private String dlrEno;
 }

@@ -1,11 +1,10 @@
 package com.du11.coreapi.repository;
 
+import com.du11.coreapi.dto.request.SRUserRequestDTO;
+import com.du11.coreapi.dto.response.SRUserResponseDTO;
 import com.du11.coreapi.entity.SRUser;
-import org.apache.catalina.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,10 +13,18 @@ import java.util.List;
 public interface SRUserRepository {
 
     @Mapper
-    SRUser findByEmpno(@Param("empno") String empno);
+    List<SRUser> findUserByEmpNo(@Param("empno") String empno, @Param("limit") int limit, @Param("offset") int offset);
 
     @Mapper
-    List<SRUser> findAll();
+    List<SRUser> findUserByEmpName(@Param("fnm") String fnm, @Param("limit") int limit, @Param("offset") int offset);
 
+    @Mapper
+    List<SRUser> findUserByEmpCompany(@Param("grp") String grp, @Param("limit") int limit, @Param("offset") int offset);
+
+    @Mapper
+    SRUser updateUser(@Param("user") SRUserRequestDTO user);
+
+    @Mapper
+    SRUser findByEmpno(@Param("empno") String empno);
 
 }

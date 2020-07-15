@@ -26,5 +26,4 @@
         where CD_ID = DTL_CD_ID AND CD_ID = #{id, jdbcType=VARCHAR}
     </select>
 
-
 </mapper>

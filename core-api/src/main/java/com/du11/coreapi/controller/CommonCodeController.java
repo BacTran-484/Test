@@ -1,6 +1,6 @@
 package com.du11.coreapi.controller;
 
-import com.du11.coreapi.dto.response.SelectBoxResponse;
+import com.du11.coreapi.dto.response.SelectBoxResponseDTO;
 import com.du11.coreapi.service.CommonCodeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class CommonCodeController {
     }
 
     @GetMapping("/selectbox")
-    public ResponseEntity<List<SelectBoxResponse>> getAllMainCodeOnSelectbox() {
+    public ResponseEntity<List<SelectBoxResponseDTO>> getAllMainCodeOnSelectbox() {
         return new ResponseEntity<>(commonCodeService.getMainCodeForSelectbox(), HttpStatus.OK);
     }
 }

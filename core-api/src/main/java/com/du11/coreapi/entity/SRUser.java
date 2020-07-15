@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "sr_dev_emp_bas")
+@Table(name = "srmg_dev_emp_bas")
 @Entity
 @Getter
 @Setter

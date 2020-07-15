@@ -11,16 +11,50 @@
     <sql id="Base_Column_List">
         EMPNO, FNM, GRP, MNGR_RGH_YN, DL_YN
     </sql>
+    <select id="findUserByEmpNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from srmg_dev_emp_bas
+        where EMPNO = #{empno, jdbcType=VARCHAR}
+        AND DL_YN != 'Y'
+        LIMIT #{limit}
+        OFFSET #{offset}
+    </select>
+
+    <select id="findUserByEmpName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from srmg_dev_emp_bas
+        where FNM = #{fnm, jdbcType=VARCHAR}
+        AND DL_YN != 'Y'
+        LIMIT #{limit}
+        OFFSET #{offset}
+    </select>
+
+    <select id="findUserByEmpCompany" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from srmg_dev_emp_bas
+        where GRP = #{grp, jdbcType=VARCHAR}
+        AND DL_YN != 'Y'
+        LIMIT #{limit}
+        OFFSET #{offset}
+    </select>
+
     <select id="findByEmpno" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from sr_dev_emp_bas
+        from srmg_dev_emp_bas
         where EMPNO = #{empno, jdbcType=VARCHAR}
         AND DL_YN != 'Y'
     </select>
-    <select id="findAll" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from sr_dev_emp_bas
-    </select>
+
+    <update id="updateUser" parameterType="com.du11.coreapi.dto.request.SRUserRequestDTO">
+        update srmg_dev_emp_bas
+        set
+           EMPNO = #{user.empno, jdbcType=VARCHAR},
+           FNM = #{user.fnm, jdbcType=VARCHAR},
+           GRP = #{user.grp, jdbcType=VARCHAR}
+        where EMPNO = #{user.empno, jdbcType=VARCHAR}
+    </update>
 </mapper>

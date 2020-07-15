@@ -1,6 +1,6 @@
 package com.du11.coreapi.service.impl;
 
-import com.du11.coreapi.dto.request.MainCodeRequest;
+import com.du11.coreapi.dto.request.CreateMainCodeRequest;
 import com.du11.coreapi.dto.response.MainCodeResponse;
 import com.du11.coreapi.dto.response.UserDTO;
 import com.du11.coreapi.entity.Code;
@@ -19,7 +19,7 @@ public class CreateMainImpl implements CreateMainCode {
     private CreateMainCodeRepository createMainCodeRepository;
 
     @Override
-    public MainCodeResponse createMainCode(MainCodeRequest mainCodeRequest) {
+    public MainCodeResponse createMainCode(CreateMainCodeRequest mainCodeRequest) {
 
         Code code = new Code();
         CodeKey key = new CodeKey();

@@ -42,7 +42,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("SR Allocation Management REST API")
                 .description("Document with Swagger 2")
-                .license("Samsung SDS")
+                .license("DU11")
                 .licenseUrl("")
                 .version("1.0")
                 .build();
