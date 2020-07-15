@@ -49,7 +49,7 @@
         AND DL_YN != 'Y'
     </select>
 
-    <update id="updateUser" parameterType="com.du11.coreapi.dto.request.SRUserRequestDTO">
+    <update id="updateUser" parameterType="com.du11.coreapi.entity.SRUser">
         update srmg_dev_emp_bas
         set
            EMPNO = #{user.empno, jdbcType=VARCHAR},

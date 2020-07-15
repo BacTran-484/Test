@@ -34,8 +34,13 @@ public class SRUserServiceImpl implements SRUserService {
         if (res == null) {
             throw new EntityNotFoundException(ApiError.builder().status(HttpStatus.NOT_FOUND.value()).build());
         } else {
-
-            SRUser srUser = srUserRepository.updateUser(srUserRequestDTO);
+            SRUser srUser = new SRUser();
+            srUser.setEmpno(srUserRequestDTO.getEmpno());
+            srUser.setDlYn(srUserRequestDTO.getDlyn());
+            srUser.setMngrRghYn(srUserRequestDTO.getMngrRghYn());
+            srUser.setGrp(srUserRequestDTO.getGrp());
+            srUser.setFnm(srUserRequestDTO.getFnm());
+            srUserRepository.updateUser(srUser);
             SRUserResponseDTO srUserResponseDTO = new SRUserResponseDTO();
             return SRUserResponseDTO.builder()
                     .empno(srUser.getEmpno())

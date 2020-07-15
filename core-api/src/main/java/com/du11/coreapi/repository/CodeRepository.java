@@ -11,7 +11,7 @@ import java.util.List;
 public interface CodeRepository {
 
     @Mapper
-    int deleteSubCode(@Param("dtlCdId") Code dtlCdId);
+    int deleteSubCode(@Param("cdId") String cdId, @Param("dtlCdId") String dtlCdId);
 
     @Mapper
     List<Code> findMainCodeByDropdown();

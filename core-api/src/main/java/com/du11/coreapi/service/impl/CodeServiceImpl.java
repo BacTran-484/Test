@@ -64,7 +64,7 @@ public class CodeServiceImpl implements CodeService {
         key.setDtlCdId(subCodeRequestDTO.getDtlCdId());
         code.setKey(key);
 
-        codeRepository.deleteSubCode(code);
+        codeRepository.deleteSubCode(subCodeRequestDTO.getCdId(), subCodeRequestDTO.getDtlCdId());
     }
 
     @Override

@@ -35,7 +35,7 @@
         where CD_ID != DTL_CD_ID AND RGR_ENO = #{rgrEno, jdbcType=VARCHAR}
     </select>
 
-    <delete id="deleteSubCode" parameterType="java.lang.String">
+    <delete id="deleteSubCode" parameterType="com.du11.coreapi.entity.Code">
         delete from rcbz_code_dtl_info
         where CD_ID != DTL_CD_ID AND DTL_CD_ID = #{dtlCdId, jdbcType=VARCHAR}
     </delete>

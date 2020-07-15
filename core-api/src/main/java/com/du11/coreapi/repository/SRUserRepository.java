@@ -22,7 +22,7 @@ public interface SRUserRepository {
     List<SRUser> findUserByEmpCompany(@Param("grp") String grp, @Param("limit") int limit, @Param("offset") int offset);
 
     @Mapper
-    SRUser updateUser(@Param("user") SRUserRequestDTO user);
+    int updateUser(@Param("user") SRUser user);
 
     @Mapper
     SRUser findByEmpno(@Param("empno") String empno);
