@@ -21,15 +21,13 @@ import java.util.List;
 @Slf4j
 public class SRUserServiceImpl implements SRUserService {
 
-    public List<SRUserResponseDTO> srUserResponseDTOS = new ArrayList<>();
+    public final List<SRUserResponseDTO> srUserResponseDTOS = new ArrayList<>();
 
     @Autowired
     private SRUserRepository srUserRepository;
 
     @Override
     public SRUserResponseDTO updateUser(SRUserRequestDTO srUserRequestDTO) {
-        // Validate
-        // find by id
         SRUser res = srUserRepository.findByEmpno(srUserRequestDTO.getEmpno());
         if (res == null) {
             throw new EntityNotFoundException(ApiError.builder().status(HttpStatus.NOT_FOUND.value()).build());
@@ -41,7 +39,6 @@ public class SRUserServiceImpl implements SRUserService {
             srUser.setGrp(srUserRequestDTO.getGrp());
             srUser.setFnm(srUserRequestDTO.getFnm());
             srUserRepository.updateUser(srUser);
-            SRUserResponseDTO srUserResponseDTO = new SRUserResponseDTO();
             return SRUserResponseDTO.builder()
                     .empno(srUser.getEmpno())
                     .fnm(srUser.getFnm())
@@ -53,12 +50,11 @@ public class SRUserServiceImpl implements SRUserService {
     }
 
     @Override
-    public List<SRUserResponseDTO> findUserByEmpNo(SRUserRequestDTO srUserRequestDTO, int limit, int offset) {
-
-        List<SRUser> srUsers = srUserRepository.findUserByEmpNo(srUserRequestDTO.getEmpno(), limit, offset);
-//        if (srUsers == null) {
-//            throw new EntityNotFoundException(ApiError.builder().build());
-//        }
+    public List<SRUserResponseDTO> findUserByEmpNo(String empno, String fnm, String grp) {
+        List<SRUser> srUsers = srUserRepository.findUserByEmpNo(empno,fnm,grp);
+        if (srUsers == null) {
+            throw new EntityNotFoundException(ApiError.builder().status(HttpStatus.NOT_FOUND.value()).build());
+        }
        for (SRUser srUser : srUsers) {
            srUserResponseDTOS.add(SRUserResponseDTO.builder()
                             .empno(srUser.getEmpno())
@@ -67,32 +63,4 @@ public class SRUserServiceImpl implements SRUserService {
        return srUserResponseDTOS;
     }
 
-    @Override
-    public List<SRUserResponseDTO> findUserByEmpName(SRUserRequestDTO srUserRequestDTO, int limit, int offset) {
-
-        List<SRUser> srUsers = srUserRepository.findUserByEmpName(srUserRequestDTO.getFnm(), limit, offset);
-//        if (srUsers == null) {
-//            throw new EntityNotFoundException();
-//        }
-        for (SRUser srUser : srUsers) {
-            srUserResponseDTOS.add(SRUserResponseDTO.builder()
-                            .fnm(srUser
-                            .getFnm())
-                            .build());
-        }
-        return srUserResponseDTOS;
-    }
-
-    @Override
-    public List<SRUserResponseDTO> findUserByEmpCompany(SRUserRequestDTO srUserRequestDTO, int limit, int offset) {
-        List<SRUser> srUsers = srUserRepository.findUserByEmpCompany(srUserRequestDTO.getGrp(), limit, offset);
-
-        for (SRUser srUser : srUsers) {
-            srUserResponseDTOS.add(SRUserResponseDTO.builder()
-                            .grp(srUser
-                            .getGrp())
-                            .build());
-        }
-        return srUserResponseDTOS;
-    }
 }

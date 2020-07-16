@@ -15,20 +15,20 @@
         select
         <include refid="Base_Column_List" />
         from srmg_dev_emp_bas
-        where EMPNO = #{empno, jdbcType=VARCHAR}
+        where EMPNO = #{empno, jdbcType=VARCHAR} OR FNM = #{fnm, jdbcType=VARCHAR} OR GRP = #{grp, jdbcType=VARCHAR}
         AND DL_YN != 'Y'
-        LIMIT #{limit}
-        OFFSET #{offset}
+
     </select>
 
     <select id="findUserByEmpName" parameterType="java.lang.String" resultMap="BaseResultMap">
+
         select
         <include refid="Base_Column_List" />
         from srmg_dev_emp_bas
         where FNM = #{fnm, jdbcType=VARCHAR}
         AND DL_YN != 'Y'
-        LIMIT #{limit}
-        OFFSET #{offset}
+
+
     </select>
 
     <select id="findUserByEmpCompany" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -37,8 +37,7 @@
         from srmg_dev_emp_bas
         where GRP = #{grp, jdbcType=VARCHAR}
         AND DL_YN != 'Y'
-        LIMIT #{limit}
-        OFFSET #{offset}
+
     </select>
 
     <select id="findByEmpno" parameterType="java.lang.String" resultMap="BaseResultMap">

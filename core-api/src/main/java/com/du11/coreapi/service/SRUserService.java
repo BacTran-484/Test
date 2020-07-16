@@ -9,7 +9,6 @@ public interface SRUserService {
 
     SRUserResponseDTO updateUser(SRUserRequestDTO srUserRequestDTO);
 
-    List<SRUserResponseDTO> findUserByEmpNo(SRUserRequestDTO srUserRequestDTO, int limit, int offset);
-    List<SRUserResponseDTO> findUserByEmpName(SRUserRequestDTO srUserRequestDTO, int limit, int offset);
-    List<SRUserResponseDTO> findUserByEmpCompany(SRUserRequestDTO srUserRequestDTO, int limit, int offset);
+    List<SRUserResponseDTO> findUserByEmpNo(String empno, String fnm, String grp);
+
 }

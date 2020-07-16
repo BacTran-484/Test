@@ -10,7 +10,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 public class SelectBoxResponseDTO implements Serializable {
-
     private String id;
     private String text;
+
 }

@@ -18,44 +18,6 @@ public class CodeServiceImpl implements CodeService {
     @Autowired
     private CodeRepository codeRepository;
 
-//    @Override
-//    public CodeResponseDTO createCode(CodeRequestDTO codeRequestDTO) {
-//
-//        key.setCdId(codeRequestDTO.getCode());
-//        key.setDtlCdId(codeRequestDTO.getCode());
-//        code.setKey(key);
-//        code.setDtlCdNm(codeRequestDTO.getName());
-//        code.setDlDt(codeRequestDTO.getExpDate());
-//
-//        codeRepository.createCode(code);
-//        Code newCode = codeRepository.findCodeById(codeRequestDTO.getCode());
-//        return CodeResponseDTO.builder()
-//                .codeId(newCode.getKey().getCdId())
-//                .detailCodeId(newCode.getKey().getDtlCdId())
-//                .name(newCode.getDtlCdNm())
-//                .expDate(newCode.getDlDt())
-//                .build();
-//    }
-
-//    @Override
-//    public CodeResponseDTO updateCode(CodeRequestDTO codeRequestDTO) {
-//
-//        key.setCdId(codeRequestDTO.getCode());
-//        key.setDtlCdId(codeRequestDTO.getCode());
-//        code.setKey(key);
-//        code.setDtlCdNm(codeRequestDTO.getName());
-//        code.setDlDt(codeRequestDTO.getExpDate());
-//
-//        codeRepository.updateCode(code);
-//        Code updatedCode = codeRepository.findCodeById(codeRequestDTO.getCode());
-//        return CodeResponseDTO.builder()
-//                .codeId(updatedCode.getKey().getCdId())
-//                .detailCodeId(updatedCode.getKey().getDtlCdId())
-//                .name(updatedCode.getDtlCdNm())
-//                .expDate(updatedCode.getDlDt())
-//                .build();
-//    }
-
     @Override
     public void deleteSubCode(SubCodeRequestDTO subCodeRequestDTO) {
         Code code = new Code();
@@ -67,6 +29,7 @@ public class CodeServiceImpl implements CodeService {
         codeRepository.deleteSubCode(subCodeRequestDTO.getCdId(), subCodeRequestDTO.getDtlCdId());
     }
 
+
     @Override
     public List<SelectBoxResponseDTO> findMainCodeByDropdown() {
         return codeRepository.findMainCodeByDropdown().stream().map(
@@ -74,10 +37,12 @@ public class CodeServiceImpl implements CodeService {
         ).collect(Collectors.toList());
     }
 
-    @Override
-    public Code findSubCodeForCompanyInfo(SubCodeRequestDTO subCodeRequestDTO) {
-        return codeRepository.findSubCodeForCompanyInfo(subCodeRequestDTO.getRgrEno());
-    }
 
+    @Override
+    public List<SelectBoxResponseDTO> findSubCodeForCompanyInfo() {
+        return codeRepository.findSubCodeForCompanyInfo().stream().map(
+                code -> new SelectBoxResponseDTO(code.getKey().getCdId(), code.getDtlCdNm())
+        ).collect(Collectors.toList());
+    }
 
 }

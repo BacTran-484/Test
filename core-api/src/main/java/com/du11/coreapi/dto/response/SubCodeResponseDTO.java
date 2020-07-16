@@ -13,6 +13,4 @@ public class SubCodeResponseDTO implements Serializable {
     private String cdId;
     private String dtlCdId;
     private String rgrEno;
-//    private String name;
-//    private String expDate;
 }

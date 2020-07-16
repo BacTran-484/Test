@@ -9,7 +9,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SelectBoxRequestDTO implements Serializable {
+public class SelectBoxRequestDTO {
     private String id;
     private String text;
 }

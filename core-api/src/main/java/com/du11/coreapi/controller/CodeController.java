@@ -1,6 +1,5 @@
 package com.du11.coreapi.controller;
 
-import com.du11.coreapi.dto.request.SelectBoxRequestDTO;
 import com.du11.coreapi.dto.request.SubCodeRequestDTO;
 import com.du11.coreapi.dto.response.SelectBoxResponseDTO;
 import com.du11.coreapi.dto.response.SubCodeResponseDTO;
@@ -16,26 +15,38 @@ import java.util.List;
 @RequestMapping("/codes")
 public class CodeController {
 
-    private CodeService codeService;
+    private final CodeService codeService;
 
     @Autowired
-    public void CodeService(CodeService codeService) {
+    public CodeController(CodeService codeService) {
         this.codeService = codeService;
     }
 
+
+    /**
+     * @author: tabac
+     * this method delete subcode
+     * @param dtlCdId
+     */
     @DeleteMapping("/subcode/delete/{dtlCdId}")
-    public ResponseEntity<SubCodeResponseDTO> deleteSubCode(@PathVariable("dtlCdId") SubCodeRequestDTO dtlCdId) {
+    public ResponseEntity<SubCodeResponseDTO> deleteSubCode(@RequestBody SubCodeRequestDTO dtlCdId) {
         codeService.deleteSubCode(dtlCdId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @GetMapping("/subcode/get/{rgrEno}")
-//    public ResponseEntity<SelectBoxResponseDTO> findSubCodeForCompanyInfo(@PathVariable SelectBoxRequestDTO rgrEno) {
-//        SelectBoxResponseDTO selectBoxResponseDTO = codeService.findSubCodeForCompanyInfo(rgrEno);
-//        return new ResponseEntity<>(selectBoxResponseDTO, HttpStatus.OK);
-//    }
+    /**
+     * @author: tabac
+     */
+    @GetMapping("/subcode/get/company")
+    public ResponseEntity<List<SelectBoxResponseDTO>> findSubCodeForCompanyInfo() {
+        return new ResponseEntity<>(codeService.findSubCodeForCompanyInfo(), HttpStatus.OK);
+    }
 
-    @GetMapping("/maincode/selectbox")
+    /**
+     * author: tabac
+     * this method get all maincode for dropdown
+     */
+    @GetMapping("/maincode/dropdown")
     public ResponseEntity<List<SelectBoxResponseDTO>> findMainCodeByDropdown() {
         return new ResponseEntity<>(codeService.findMainCodeByDropdown(), HttpStatus.OK);
     }

@@ -17,12 +17,6 @@ public interface CodeRepository {
     List<Code> findMainCodeByDropdown();
 
     @Mapper
-    Code findSubCodeForCompanyInfo(@Param("rgrEno") String rgrEno);
+    List<Code> findSubCodeForCompanyInfo();
 
-
-//    @Mapper
-//    Code findSubCodeByCompany(@Param(""))
-
-//    @Mapper
-//    Code findCodeById(@Param("id") String id);
 }
