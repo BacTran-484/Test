@@ -19,4 +19,26 @@ public interface CodeRepository {
     @Mapper
     List<Code> findSubCodeForCompanyInfo();
 
+    @Mapper
+    List<Code> findSubCodeForUserType();
+
+    @Mapper
+    List<Code> findAllMainCode(int limit, int offset, String fieldName, String ascDesc);
+
+    @Mapper
+    List<Code> findMainCode();
+
+    @Mapper
+    int updateCode(@Param("code") Code code);
+
+    @Mapper
+    int createCode(@Param("code") Code code);
+
+    @Mapper
+    int deleteMainCode(@Param("cdId") String cdId);
+
+    @Mapper
+    Code findMainCodeById(@Param("id") String id);
+
+
 }

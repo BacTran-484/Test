@@ -5,27 +5,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.repository.Repository;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
 @Slf4j
-@Aspect
 @Component
 public class LoggingAspect {
 
+    private static final String LOG_PARAM = "[%s.%s] params value: %s";
+    
     @Autowired
     ObjectMapper mapper;
 
     @Pointcut("within(@org.springframework.stereotype.Repository *)")
-    public void repositoryClassMethods() {};
+    public void repositoryClassMethods() {
+        //This method for pointcut declare
+    }
 
-    @Around("repositoryClassMethods()")
     public Object logHeadAndTail(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
 
@@ -38,11 +38,11 @@ public class LoggingAspect {
         String method = methodSignature.getName();
         for (Object param : proceedingJoinPoint.getArgs()) {
             if (param instanceof Class) {
-                log.info(String.format("[%s.%s] params value: %s", className, method, mapper.writeValueAsString(param)));
+                log.info(String.format(LOG_PARAM, className, method, mapper.writeValueAsString(param)));
             } else if (null == param) {
-                log.info(String.format("[%s.%s] params value: %s", className, method, "NULL"));
+                log.info(String.format(LOG_PARAM, className, method, "NULL"));
             } else {
-                log.info(String.format("[%s.%s] params value: %s", className, method, param.toString()));
+                log.info(String.format(LOG_PARAM, className, method, param.toString()));
             }
         }
 

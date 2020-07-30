@@ -1,15 +1,8 @@
 package com.du11.coreapi.dto.response;
 
-import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class UserDTO {
-
     private String empno;
 
     @CreatedBy
@@ -17,5 +10,4 @@ public class UserDTO {
     public String getCreatedBy() {
         return createdBy;
     }
-
 }

@@ -3,7 +3,6 @@ package com.du11.coreapi.controller;
 import com.du11.coreapi.dto.request.LoginRequest;
 import com.du11.coreapi.dto.response.LoginResponse;
 import com.du11.coreapi.security.JwtTokenProvider;
-import com.du11.coreapi.service.impl.LoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +21,6 @@ import java.util.Arrays;
 @RestController
 @RequestMapping(value = "/login")
 public class LoginController {
-
-    @Autowired
-    private LoginServiceImpl loginService;
 
     @Autowired
     AuthenticationManager authenticationManager;

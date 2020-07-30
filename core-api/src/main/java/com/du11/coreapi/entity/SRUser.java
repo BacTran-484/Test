@@ -1,9 +1,6 @@
 package com.du11.coreapi.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +13,7 @@ import javax.persistence.Table;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class SRUser {
 
     @Id
@@ -33,4 +31,13 @@ public class SRUser {
 
     @Column(name = "DL_YN")
     private String dlYn;
+
+//    @Column(name = "EMPNO")
+//    private String anaEmpno;
+//
+//    @Column(name = "FNM")
+//    private String anaFnm;
+//
+//    @Column(name = "FNM")
+//    private String dev;
 }

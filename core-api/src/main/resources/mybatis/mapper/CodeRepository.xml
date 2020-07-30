@@ -14,6 +14,62 @@
         CD_ID, DTL_CD_ID, DTL_CD_NM, RGR_ENO, RG_DT, DL_DT
     </sql>
 
+    <select id="getOneMainCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from rcbz_code_dtl_info
+        where CD_ID = DTL_CD_ID AND CD_ID = #{id, jdbcType=VARCHAR}
+    </select>
+
+    <insert id="createMainCode" parameterType="com.du11.coreapi.entity.Code">
+     insert into rcbz_code_dtl_info(CD_ID,DTL_CD_ID,DTL_CD_NM,DL_DT)
+      values (#{code.key.cdId, jdbcType=VARCHAR},
+      #{code.key.cdId, jdbcType=VARCHAR},
+      #{code.dtlCdNm, jdbcType=VARCHAR},
+      #{code.dlDt, jdbcType=VARCHAR})
+    </insert>
+
+    <select id="findAllMainCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM rcbz_code_dtl_info
+        <if test="fieldName != null and ascDesc != null">
+            order by
+            <choose>
+                <when test="fieldName == 'cdId'">
+                    CD_ID
+                </when>
+                <when test="fieldName == 'dtlCdNm'">
+                    DTL_CD_ID
+                </when>
+                <when test="fieldName == 'rgrEno'">
+                    RGR_ENO
+                </when>
+                <when test="fieldName == 'rgDt'">
+                    RG_DT
+                </when>
+                <when test="fieldName == 'dlDt'">
+                    DL_DT
+                </when>
+            </choose>
+            <if test="ascDesc == 'asc'">
+                ASC
+            </if>
+            <if test="ascDesc == 'desc'">
+                DESC
+            </if>
+        </if>
+        LIMIT #{limit}
+        OFFSET #{offset}
+    </select>
+
+    <select id="findMainCode"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from rcbz_code_dtl_info
+        where CD_ID = DTL_CD_ID
+    </select>
+
     <select id="findCodeById" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
@@ -39,6 +95,38 @@
         delete from rcbz_code_dtl_info
         where CD_ID != DTL_CD_ID AND DTL_CD_ID = #{dtlCdId, jdbcType=VARCHAR}
     </delete>
-    
 
+    <select id="findMainCodeById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from rcbz_code_dtl_info
+        where CD_ID = DTL_CD_ID AND CD_ID = #{id, jdbcType=VARCHAR}
+    </select>
+
+    <select id="findSubCodeForUserType" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM rcbz_code_dtl_info
+        WHERE CD_ID != DTL_CD_ID
+    </select>
+
+    <insert id="createCode" parameterType="com.du11.coreapi.entity.Code">
+        INSERT INTO rcbz_code_dtl_info(CD_ID, DTL_CD_ID, DTL_CD_NM,  DL_DT)
+        VALUES (#{code.key.cdId, jdbcType = VARCHAR},
+                #{code.key.dtlCdId, jdbcType = VARCHAR},
+                #{code.dtlCdNm, jdbcType = VARCHAR},
+                #{code.dlDt, jdbcType = VARCHAR})
+    </insert>
+
+    <update id="updateCode" parameterType="com.du11.coreapi.entity.Code" >
+        UPDATE rcbz_code_dtl_info
+        SET DTL_CD_NM = #{code.dtlCdNm, jdbcType = VARCHAR},
+            DL_DT = #{code.dlDt, jdbcType = VARCHAR}
+            WHERE  CD_ID = #{code.key.cdId, jdbcType = VARCHAR} AND DTL_CD_ID = #{code.key.dtlCdId, jdbcType = VARCHAR}
+    </update>
+
+    <delete id="deleteMainCode" parameterType="java.lang.String">
+        DELETE FROM rcbz_code_dtl_info
+        WHERE CD_ID = #{cdId, jdbcType = VARCHAR}
+    </delete>
 </mapper>

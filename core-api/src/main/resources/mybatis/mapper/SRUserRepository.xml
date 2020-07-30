@@ -11,41 +11,45 @@
     <sql id="Base_Column_List">
         EMPNO, FNM, GRP, MNGR_RGH_YN, DL_YN
     </sql>
-    <select id="findUserByEmpNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+    <select id="findByEmpno" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from srmg_dev_emp_bas
+        where EMPNO = #{empno, jdbcType=VARCHAR}
+        AND DL_YN != 'Y'
+    </select>
+
+    <delete id="deleteSRUserById" parameterType="java.lang.String">
+        DELETE FROM srmg_dev_emp_bas WHERE EMPNO = #{empno, jdbcType=VARCHAR}
+    </delete>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from srmg_dev_emp_bas
+        ORDER BY EMPNO DESC
+        LIMIT #{limit}
+        OFFSET #{offset}
+
+    </select>
+
+    <insert id="createUser" parameterType="com.du11.coreapi.entity.SRUser">
+        INSERT INTO srmg_dev_emp_bas
+        VALUES (#{SRUser.empno,jdbcType=VARCHAR},
+                #{SRUser.fnm,jdbcType=VARCHAR},
+                #{SRUser.grp,jdbcType=VARCHAR},
+                #{SRUser.mngrRghYn,jdbcType=VARCHAR},
+                #{SRUser.dlYn,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="findUserBy" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from srmg_dev_emp_bas
         where EMPNO = #{empno, jdbcType=VARCHAR} OR FNM = #{fnm, jdbcType=VARCHAR} OR GRP = #{grp, jdbcType=VARCHAR}
         AND DL_YN != 'Y'
-
-    </select>
-
-    <select id="findUserByEmpName" parameterType="java.lang.String" resultMap="BaseResultMap">
-
-        select
-        <include refid="Base_Column_List" />
-        from srmg_dev_emp_bas
-        where FNM = #{fnm, jdbcType=VARCHAR}
-        AND DL_YN != 'Y'
-
-
-    </select>
-
-    <select id="findUserByEmpCompany" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from srmg_dev_emp_bas
-        where GRP = #{grp, jdbcType=VARCHAR}
-        AND DL_YN != 'Y'
-
-    </select>
-
-    <select id="findByEmpno" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from srmg_dev_emp_bas
-        where EMPNO = #{empno, jdbcType=VARCHAR}
-        AND DL_YN != 'Y'
+        ORDER BY EMPNO DESC
     </select>
 
     <update id="updateUser" parameterType="com.du11.coreapi.entity.SRUser">
@@ -56,4 +60,5 @@
            GRP = #{user.grp, jdbcType=VARCHAR}
         where EMPNO = #{user.empno, jdbcType=VARCHAR}
     </update>
+
 </mapper>

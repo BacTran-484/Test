@@ -2,6 +2,8 @@ package com.du11.coreapi.common;
 
 public class ErrorMessageConstants {
 
+    private ErrorMessageConstants(){}
+
     public static final String ERROR_CODE_COMMON_PREFIX = "COM_";
     public static final String ERROR_FIELD_IS_REQUIRED = "COM_001";
     public static final String ERROR_FIELD_IS_INVALID = "COM_002";

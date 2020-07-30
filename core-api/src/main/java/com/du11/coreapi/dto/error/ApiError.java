@@ -2,6 +2,7 @@ package com.du11.coreapi.dto.error;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -9,7 +10,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiError {
+public class ApiError implements Serializable {
 
     private int status = 400;
     private String statusMessage;

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.du11.coreapi.repository.SRDetailRepository">
+    <resultMap id="BaseResultMap" type="com.du11.coreapi.entity.SRDetail">
+        <association property="srmgIstmInfo" javaType="SRmgIstmInfo">
+            <id column="srId" property="srId"/>
+            <result column="srNm" property="srNm" />
+            <result column="appNm" property="appNm" />
+            <result column="rqrNm" property="rqrNm" />
+            <result column="chPsicNm" property="chPsicNm" />
+            <result column="chPrgStsNm" property="chPrgStsNm" />
+        </association>
+        <association property="srmgSrIz" javaType="SRmgSrIz">
+            <result column="tskC" property="tskC" />
+            <result column="akDept" property="akDept" />
+            <result column="akDt" property="akDt" />
+            <result column="asnDt" property="asnDt" />
+            <result column="devAkDt" property="devAkDt" />
+            <result column="pgrSts" property="prgSts" />
+            <result column="fshDt" property="fshDt" />
+            <result column="fshExpDt" property="fshExpDt" />
+            <result column="strtdt" property="strtdt" />
+            <result column="enddt" property="enddt" />
+            <result column="tfDt" property="tfDt" />
+            <result column="srMo" property="srMo" />
+        </association>
+        <association property="srUser" javaType="SRUser">
+            <id column="anaEmpno" property="empno"/>
+            <result column="anaFnm" property="fnm" />
+            <result column="dev" property="fnm" />
+        </association>
+    </resultMap>
+
+    <select id="getSrDetailBySrId" resultMap="BaseResultMap" >
+        SELECT A.SR_ID as SR_ID
+        , A.SR_NM AS SR_NM
+        , B.TSK_C AS TSK_C
+        , A.APP_NM AS APP_NM
+        , B.AK_DEPT AS AK_DEPT
+        , A.RQR_NM AS RQR_NM
+        , A.CH_PSIC_NM AS CH_PSIC_NM
+        , B.AK_DT AS AK_DT
+        , date(B.ASN_DT) AS ASN_DT
+        , B.DEV_AK_DT AS DEV_AK_DT
+        , B.PRG_STS AS PRG_STS
+        , B.FSH_DT AS FSH_DT
+        , date(B.FSH_EXP_DT) AS FSH_EXP_DT
+        , date(B.STRTDT) AS STRTDT
+        , date(B.ENDDT) AS ENDDT
+        , B.TF_DT AS TF_DT
+        , C.FNM  AS ANA_FNM
+        , C.EMPNO AS ANA_EMPNO
+        , D.FNM  AS DEV
+        , D.EMPNO AS ANA_EMPNO
+        , B.SR_MO AS SR_MO
+        , A.CH_PRG_STS_NM AS CH_PRG_STS_NM
+        FROM
+        SRMG_ITSM_INFO A, SRMG_SR_IZ B
+            LEFT OUTER JOIN SRMG_DEV_EMP_BAS D ON  B.DEV_EMPNO = D.EMPNO
+            LEFT OUTER JOIN SRMG_DEV_EMP_BAS C ON B.ANA_EMPNO = C.EMPNO
+        WHERE
+            1 = 1
+            <if test="srDetailRequestDTO.srId != null and srDetailRequestDTO.srId != ''">
+                AND A.SR_ID = #{srDetailRequestDTO.srId}
+            </if>
+        AND B.SR_ID = A.SR_ID
+    </select>
+
+    <insert id="createMemo" parameterType="java.lang.String">
+       INSERT INTO srmg_sr_iz (sr_mo)
+       VALUES (#{srMo, jdbcType=VARCHAR})
+    </insert>
+
+    <update id="updateMemo" parameterType="com.du11.coreapi.entity.SRDetail" >
+        UPDATE srmg_sr_iz
+        SET sr_mo = #{srDetail.srMo , jdbcType = VARCHAR}
+        WHERE sr_id = #{srDetail.srId, jdbcType = VARCHAR}
+    </update>
+
+
+</mapper>

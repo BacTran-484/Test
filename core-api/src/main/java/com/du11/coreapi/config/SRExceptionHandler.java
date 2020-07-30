@@ -3,6 +3,8 @@ package com.du11.coreapi.config;
 import com.du11.coreapi.common.ErrorMessageConstants;
 import com.du11.coreapi.dto.error.ApiError;
 import com.du11.coreapi.dto.error.ApiErrorDetail;
+import com.du11.coreapi.exception.EntityNotFoundException;
+import com.du11.coreapi.exception.InsertExistedEntityException;
 import com.du11.coreapi.exception.SRException;
 import com.du11.coreapi.utils.MessageUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +43,30 @@ public class SRExceptionHandler {
 
     @Autowired
     MessageUtils messageUtils;
+
+    @ExceptionHandler(value = {EntityNotFoundException.class})
+    public ResponseEntity<ApiError> handleEntityNotFoundException(EntityNotFoundException e){
+        log.error(e.getMessage());
+        ApiError apiError = ApiError.builder()
+                .status(HttpStatus.NOT_FOUND.value())
+                .statusMessage("Data not found")
+                .timestamp(Instant.now().toString())
+                .build();
+        return new ResponseEntity<>(apiError, new HttpHeaders(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = {InsertExistedEntityException.class})
+    public ResponseEntity<ApiError> handleInsertExistedEntityException(InsertExistedEntityException e){
+        log.error(e.getMessage());
+
+        ApiError apiError = ApiError.builder()
+                .status(HttpStatus.BAD_REQUEST.value())
+                .statusMessage("The entity is existed.")
+                .timestamp(Instant.now().toString())
+                .errors(e.getApiError().getErrors())
+                .build();
+        return new ResponseEntity<>(apiError, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler
     public ResponseEntity<ApiError> handleSRException(SRException ex, WebRequest request) {

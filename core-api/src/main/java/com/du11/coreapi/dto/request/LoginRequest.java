@@ -17,6 +17,6 @@ public class LoginRequest {
     private String id;
 
     @NotEmpty
-    @Size( max = 100)
+    @Size(max = 100)
     private String password;
 }

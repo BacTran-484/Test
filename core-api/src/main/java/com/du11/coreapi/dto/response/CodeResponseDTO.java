@@ -9,6 +9,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
 public class CodeResponseDTO implements Serializable {
     private String cdId;
     private String dtlCdId;
