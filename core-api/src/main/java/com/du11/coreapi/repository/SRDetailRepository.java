@@ -12,9 +12,9 @@ public interface SRDetailRepository {
     @Mapper
     SRDetail getSrDetailBySrId(@Param("srDetailRequestDTO") SRDetailRequestDTO srDetailRequestDTO);
 
-//    @Mapper
-//    int createMemo(@Param("srMo") String srMo);
-
     @Mapper
-    SRDetailResponseDTO updateMemo(@Param("srDetailRequestDTO") SRDetailRequestDTO srDetailRequestDTO);
+    int updateMemo(@Param("srDetail") SRDetailResponseDTO srDetail);
+
+//    @Mapper
+//    int updateSRDetail(@Param("srDetail") SRDetailResponseDTO srDetail);
 }

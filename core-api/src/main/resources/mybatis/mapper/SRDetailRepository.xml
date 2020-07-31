@@ -3,31 +3,32 @@
 <mapper namespace="com.du11.coreapi.repository.SRDetailRepository">
     <resultMap id="BaseResultMap" type="com.du11.coreapi.entity.SRDetail">
         <association property="srmgIstmInfo" javaType="SRmgIstmInfo">
-            <id column="srId" property="srId"/>
-            <result column="srNm" property="srNm" />
-            <result column="appNm" property="appNm" />
-            <result column="rqrNm" property="rqrNm" />
-            <result column="chPsicNm" property="chPsicNm" />
-            <result column="chPrgStsNm" property="chPrgStsNm" />
+            <id column="sr_id" property="srId"/>
+            <result column="sr_nm" property="srNm" />
+            <result column="app_nm" property="appNm" />
+            <result column="rqr_nm" property="rqrNm" />
+            <result column="ch_psic_nm" property="chPsicNm" />
+            <result column="ch_prg_sts_nm" property="chPrgStsNm" />
         </association>
         <association property="srmgSrIz" javaType="SRmgSrIz">
-            <result column="tskC" property="tskC" />
-            <result column="akDept" property="akDept" />
-            <result column="akDt" property="akDt" />
-            <result column="asnDt" property="asnDt" />
-            <result column="devAkDt" property="devAkDt" />
-            <result column="pgrSts" property="prgSts" />
-            <result column="fshDt" property="fshDt" />
-            <result column="fshExpDt" property="fshExpDt" />
+            <id column="sr_id" property="srId"/>
+            <result column="tsk_c" property="tskC" />
+            <result column="ak_dept" property="akDept" />
+            <result column="ak_dt" property="akDt" />
+            <result column="asn_dt" property="asnDt" />
+            <result column="dev_ak_dt" property="devAkDt" />
+            <result column="prg_sts" property="prgSts" />
+            <result column="fsh_dt" property="fshDt" />
+            <result column="fsh_exp_dt" property="fshExpDt" />
             <result column="strtdt" property="strtdt" />
             <result column="enddt" property="enddt" />
-            <result column="tfDt" property="tfDt" />
-            <result column="srMo" property="srMo" />
+            <result column="tf_dt" property="tfDt" />
+            <result column="sr_mo" property="srMo" />
         </association>
         <association property="srUser" javaType="SRUser">
-            <id column="anaEmpno" property="empno"/>
-            <result column="anaFnm" property="fnm" />
-            <result column="dev" property="fnm" />
+            <id column="ANA_EMPNO" property="empno"/>
+            <result column="ANA_FNM" property="fnm" />
+            <result column="DEV" property="fnm" />
         </association>
     </resultMap>
 
@@ -71,11 +72,34 @@
        VALUES (#{srMo, jdbcType=VARCHAR})
     </insert>
 
-    <update id="updateMemo" parameterType="com.du11.coreapi.entity.SRDetail" >
+    <update id="updateMemo"  >
         UPDATE srmg_sr_iz
         SET sr_mo = #{srDetail.srMo , jdbcType = VARCHAR}
         WHERE sr_id = #{srDetail.srId, jdbcType = VARCHAR}
     </update>
+
+<!--    <update id="updateSRDetail" >-->
+<!--        BEGIN TRANSACTION;-->
+
+<!--        UPDATE srmg_sr_iz-->
+<!--            SET srmg_sr_iz.tsk_c = #{srDetail.tskC, jdbcType = VARCHAR},-->
+<!--                srmg_sr_iz.prg_sts = #{srDetail.prgSts, jdbcType = VARCHAR},-->
+<!--                srmg_sr_iz.fsh_exp_dt = #{srDetail.fshExpDt, jdbcType = VARCHAR},-->
+<!--                srmg_sr_iz.asn_dt = #{srDetail.asnDt, jdbcType = VARCHAR},-->
+<!--                srmg_sr_iz.strtdt = #{srDetail.strtdt, jdbcType = VARCHAR},-->
+<!--                srmg_sr_iz.enddt = #{srDetail.enddt, jdbcType = VARCHAR},-->
+<!--                srmg_sr_iz.sr_mo = #{srDetail.srMo , jdbcType = VARCHAR}-->
+<!--        FROM srmg_sr_iz A, srmg_itsm_info B-->
+<!--        WHERE A.sr_id = B.sr_id;-->
+
+<!--        UPDATE srmg_itsm_info-->
+<!--            SET srmg_itsm_info.sr_nm = #{srDetail.srNm, jdbcType = VARCHAR},-->
+<!--                srmg_itsm_info.ch_psic_nm = #{srDetail.chPsicNm, jdbcType = VARCHAR}-->
+<!--        FROM srmg_sr_iz A, srmg_itsm_info B-->
+<!--        WHERE A.sr_id = B.sr_id;-->
+
+<!--        COMMIT;-->
+<!--    </update>-->
 
 
 </mapper>

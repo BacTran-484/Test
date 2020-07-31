@@ -27,5 +27,4 @@ public interface SRUserService {
     UserResponseDTO createUser(UserRequestDTO userRequestDTO) throws InsertExistedEntityException;
 
 
-
 }

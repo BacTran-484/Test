@@ -18,5 +18,5 @@ public class SRDetailResponseDTO {
     private String allocDt;
     private String strDt;
     private String endDt;
-    private String memo;
+    private String srMo;
 }

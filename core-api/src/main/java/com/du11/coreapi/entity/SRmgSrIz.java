@@ -32,11 +32,14 @@ public class SRmgSrIz {
     @Column(name = "ak_dt")
     private String akDt;
 
+    @Column(name = "prg_sts")
+    private String prgSts;
+
     @Column(name = "dev_ak_dt")
     private String devAkDt;
 
-    @Column(name = "prg_sts")
-    private String pgrSts;
+    @Column(name = "asn_dt")
+    private String asnDt;
 
     @Column(name = "fsh_dt")
     private String fshDt;
