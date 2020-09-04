@@ -15,5 +15,5 @@ public interface SRDetailService {
 
     SRDetailResponseDTO updateMemo(SRDetailRequestDTO srDetailRequestDTO);
 
-//    SRDetailResponseDTO updateSRDetail(SRDetailRequestDTO srDetailRequestDTO);
+    SRDetailResponseDTO updateSRDetail(SRDetailRequestDTO srDetailRequestDTO);
 }

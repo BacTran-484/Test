@@ -53,8 +53,8 @@ class SRUserRepositoryTest {
 
         //Mock input entity
         SRUser mockInput = new SRUser();
-        mockInput.setEmpno("thao3");
-        mockInput.setFnm("Thao");
+        mockInput.setEmpno("thao4");
+        mockInput.setFnm("Thaoo");
         mockInput.setGrp("1");
         mockInput.setMngrRghYn("Y");
         mockInput.setDlYn("N");
@@ -63,10 +63,10 @@ class SRUserRepositoryTest {
         srUserRepository.createUser(mockInput);
 
         //Assert expected vs actual
-        SRUser actual = srUserRepository.findByEmpno("thao3");
+        SRUser actual = srUserRepository.findByEmpno("thao4");
         assertNotNull(actual);
-        assertEquals("thao3", actual.getEmpno());
-        assertEquals("Thao", actual.getFnm());
+        assertEquals("thao4", actual.getEmpno());
+        assertEquals("Thaoo", actual.getFnm());
         assertEquals("1", actual.getGrp());
         assertEquals("Y", actual.getMngrRghYn());
         assertEquals("N", actual.getDlYn());
@@ -106,10 +106,10 @@ class SRUserRepositoryTest {
     void testFindUserBy_InputValid_ShouldFindUsers() {
         List<SRUser> listActual = srUserRepository.findUserBy("D00001", "user1", "1");
         assertNotNull(listActual);
-        assertEquals(1, listActual.size());
-        assertEquals("D00001", listActual.get(0).getEmpno());
-        assertEquals("user1", listActual.get(0).getFnm());
-        assertEquals("1", listActual.get(0).getGrp());
+        assertEquals(2, listActual.size());
+        assertEquals("D00001", listActual.get(1).getEmpno());
+        assertEquals("user1", listActual.get(1).getFnm());
+        assertEquals("1", listActual.get(1).getGrp());
     }
 
 }

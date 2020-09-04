@@ -45,7 +45,7 @@ class SRUserServiceImplTest {
     void createUser_InputValid_ShouldReturnProperlyResponse() throws Exception {
         //Mock input
         UserRequestDTO mockDTO = UserRequestDTO.builder()
-                .empno("abcdef")
+                .empno("bac")
                 .fnm("Bac")
                 .build();
         //Mock dependency
@@ -55,7 +55,7 @@ class SRUserServiceImplTest {
         UserResponseDTO result = this.srUserService.createUser(mockDTO);
 
         //Kiem tra ket qua
-        assertEquals("abcdef", result.getEmpno());
+        assertEquals("bac", result.getEmpno());
         assertEquals("Bac", result.getFnm());
 
     }
@@ -72,24 +72,26 @@ class SRUserServiceImplTest {
                 new DuplicateKeyException("Duplicate entry 'bac' for key 'PRIMARY'"));
 
         //Run function can test voi mock input o tren
-        InsertExistedEntityException exception = assertThrows(InsertExistedEntityException.class ,
-                () -> { this.srUserService.createUser(mockDTO);});
+        InsertExistedEntityException exception = assertThrows(InsertExistedEntityException.class,
+                () -> {
+                    this.srUserService.createUser(mockDTO);
+                });
 
         assertEquals("Duplicate entry 'bac' for key 'PRIMARY'", exception.getMessage());
 
     }
 
-//    @Test
-//    void getAllUsers (){
-//        List<SRUser> mockList = new ArrayList<>();
-//        mockList.add(new SRUser("123","duy","1","Y","N"));
-//        when (srUserRepository.findAll(anyInt(),anyInt())).thenReturn(mockList);
-//        List<UserResponseDTO> result = this.srUserService.getAllUsers(1,0);
-//
-//        assertNotNull(result);
-//        assertEquals(1,result.size());
-//        assertEquals("123",result.get(0).getEmpno());
-//    }
+    @Test
+    void getAllUsers (){
+        List<SRUser> mockList = new ArrayList<>();
+        mockList.add(new SRUser("123","duy","1","Y","N"));
+        when (srUserRepository.findAll(anyInt(),anyInt())).thenReturn(mockList);
+        List<UserResponseDTO> result = this.srUserService.getAllUsers(1,0);
+
+        assertNotNull(result);
+        assertEquals(1,result.size());
+        assertEquals("123",result.get(0).getEmpno());
+    }
 
     @Test
     void updateUser_InputValid_ShouldReturnProperlyResponse() {

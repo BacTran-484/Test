@@ -39,10 +39,10 @@ public class SRDetailController {
         return new ResponseEntity<>(srDetailResponseDTO, HttpStatus.OK);
     }
 
-//    @PutMapping
-//    public ResponseEntity<SRDetailResponseDTO> updateSRDetail(@Valid @RequestBody SRDetailRequestDTO srDetailRequestDTO) {
-//        SRDetailResponseDTO srDetailResponseDTO = srDetailService.updateSRDetail(srDetailRequestDTO);
-//        return new ResponseEntity<>(srDetailResponseDTO, HttpStatus.OK);
-//    }
+    @PutMapping
+    public ResponseEntity<SRDetailResponseDTO> updateSRDetail(@Valid @RequestBody SRDetailRequestDTO srDetailRequestDTO) {
+        SRDetailResponseDTO srDetailResponseDTO = srDetailService.updateSRDetail(srDetailRequestDTO);
+        return new ResponseEntity<>(srDetailResponseDTO, HttpStatus.OK);
+    }
 
 }

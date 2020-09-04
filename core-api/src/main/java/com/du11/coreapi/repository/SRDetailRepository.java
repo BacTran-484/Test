@@ -15,6 +15,6 @@ public interface SRDetailRepository {
     @Mapper
     int updateMemo(@Param("srDetail") SRDetailResponseDTO srDetail);
 
-//    @Mapper
-//    int updateSRDetail(@Param("srDetail") SRDetailResponseDTO srDetail);
+    @Mapper
+    int updateSRDetail(@Param("srDetail") SRDetailResponseDTO srDetail);
 }

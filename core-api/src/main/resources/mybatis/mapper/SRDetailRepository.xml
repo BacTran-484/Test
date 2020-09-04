@@ -67,10 +67,10 @@
         AND B.SR_ID = A.SR_ID
     </select>
 
-    <insert id="createMemo" parameterType="java.lang.String">
-       INSERT INTO srmg_sr_iz (sr_mo)
-       VALUES (#{srMo, jdbcType=VARCHAR})
-    </insert>
+<!--    <insert id="createMemo" parameterType="java.lang.String">-->
+<!--       INSERT INTO srmg_sr_iz (sr_mo)-->
+<!--       VALUES (#{srMo, jdbcType=VARCHAR})-->
+<!--    </insert>-->
 
     <update id="updateMemo"  >
         UPDATE srmg_sr_iz
@@ -78,28 +78,28 @@
         WHERE sr_id = #{srDetail.srId, jdbcType = VARCHAR}
     </update>
 
-<!--    <update id="updateSRDetail" >-->
-<!--        BEGIN TRANSACTION;-->
+    <update id="updateSRDetail" parameterType="com.du11.coreapi.entity.SRDetail">
+        BEGIN TRANSACTION;
 
-<!--        UPDATE srmg_sr_iz-->
-<!--            SET srmg_sr_iz.tsk_c = #{srDetail.tskC, jdbcType = VARCHAR},-->
-<!--                srmg_sr_iz.prg_sts = #{srDetail.prgSts, jdbcType = VARCHAR},-->
-<!--                srmg_sr_iz.fsh_exp_dt = #{srDetail.fshExpDt, jdbcType = VARCHAR},-->
-<!--                srmg_sr_iz.asn_dt = #{srDetail.asnDt, jdbcType = VARCHAR},-->
-<!--                srmg_sr_iz.strtdt = #{srDetail.strtdt, jdbcType = VARCHAR},-->
-<!--                srmg_sr_iz.enddt = #{srDetail.enddt, jdbcType = VARCHAR},-->
-<!--                srmg_sr_iz.sr_mo = #{srDetail.srMo , jdbcType = VARCHAR}-->
-<!--        FROM srmg_sr_iz A, srmg_itsm_info B-->
-<!--        WHERE A.sr_id = B.sr_id;-->
+        UPDATE srmg_sr_iz
+            SET srmg_sr_iz.prg_sts = #{srDetail.prgSts, jdbcType = VARCHAR},
+                srmg_sr_iz.tsk_c = #{srDetail.tskC, jdbcType = VARCHAR},
+                srmg_sr_iz.fsh_exp_dt = #{srDetail.fshExpDt, jdbcType = VARCHAR},
+                srmg_sr_iz.asn_dt = #{srDetail.asnDt, jdbcType = VARCHAR},
+                srmg_sr_iz.strtdt = #{srDetail.strtdt, jdbcType = VARCHAR},
+                srmg_sr_iz.enddt = #{srDetail.enddt, jdbcType = VARCHAR},
+                srmg_sr_iz.sr_mo = #{srDetail.srMo , jdbcType = VARCHAR}
+        FROM srmg_sr_iz A, srmg_itsm_info B
+        WHERE A.sr_id = B.sr_id;
 
-<!--        UPDATE srmg_itsm_info-->
-<!--            SET srmg_itsm_info.sr_nm = #{srDetail.srNm, jdbcType = VARCHAR},-->
-<!--                srmg_itsm_info.ch_psic_nm = #{srDetail.chPsicNm, jdbcType = VARCHAR}-->
-<!--        FROM srmg_sr_iz A, srmg_itsm_info B-->
-<!--        WHERE A.sr_id = B.sr_id;-->
+        UPDATE srmg_itsm_info
+            SET srmg_itsm_info.sr_nm = #{srDetail.srNm, jdbcType = VARCHAR},
+                srmg_itsm_info.ch_psic_nm = #{srDetail.chPsicNm, jdbcType = VARCHAR}
+        FROM srmg_sr_iz A, srmg_itsm_info B
+        WHERE A.sr_id = B.sr_id;
 
-<!--        COMMIT;-->
-<!--    </update>-->
+        COMMIT;
+    </update>
 
 
 </mapper>
